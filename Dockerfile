@@ -10,12 +10,12 @@ COPY build.gradle .
 COPY settings.gradle .
 COPY src ./src
 
-# Dar permisos al wrapper y compilar el fat-jar sin tests para agilizar el build
+# Dar permisos al wrapper y compilar el fat-jar sin tests
 RUN chmod +x ./gradlew
 RUN ./gradlew bootJar -x test --no-daemon
 
 # Stage 2: Ejecución
-FROM openjdk:21-jdk-slim
+FROM eclipse-temurin:21-jre-jammy
 
 WORKDIR /app
 
@@ -28,5 +28,4 @@ EXPOSE 8080
 
 ENTRYPOINT ["java", "-jar", "app.jar"]
 
-
-# ojo DockerFile 1= Dockerfile
+# ojo DockerFile 1= Dockerfilegit mv DockerFile Dockerfile
